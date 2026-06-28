@@ -17,41 +17,121 @@ features = joblib.load(features_path)
 
 st.title("Explainable Credit Risk AI")
 st.write("Predict whether a loan applicant is risky or safe.")
+st.markdown("---")
+
+with st.sidebar:
+
+    st.markdown("# 💳 Credit Risk AI")
+
+    st.markdown("---")
+
+    st.markdown("### 🤖 Model Information")
+
+    st.write("Random Forest Classifier")
+
+    st.markdown("### 📌 Features")
+
+    st.markdown("""
+    - Loan Risk Prediction  
+    - Risk Probability  
+    - Explainable AI Logic  
+    - Financial Risk Analysis  
+    """)
+
+    st.markdown("---")
+
+    st.markdown("### 👨‍💻 Developed By")
+
+    st.write("Suyog Verma")
 
 
+st.subheader("👤 Applicant Information")
 
-person_age = st.number_input("Person Age", min_value=18, max_value=100, value=25)
+col1, col2 = st.columns(2)
 
-person_income = st.number_input("Person Income", min_value=0, value=50000)
+with col1:
+    person_age = st.number_input(
+    "Age",
+    min_value=18,
+    max_value=100,
+    value=25
+    )
 
-person_emp_length = st.number_input("Employment Length", min_value=0.0, value=2.0)
-
-loan_grade = st.selectbox(
-    "Loan Grade",
-    ["A", "B", "C", "D", "E", "F", "G"]
-)
-
-loan_amnt = st.number_input("Loan Amount", min_value=0, value=10000)
-
-loan_int_rate = st.number_input("Interest Rate", min_value=0.0, value=10.0)
-
-loan_percent_income = st.number_input(
-    "Loan Percent Income",
-    min_value=0.0,
-    value=0.2
-)
-
-cb_person_cred_hist_length = st.number_input(
-    "Credit History Length",
+    person_emp_length = st.number_input(
+    "Employment Experience (Years)",
     min_value=0,
+    max_value=40,
+    value=2
+    )
+    st.markdown("---")
+
+with col2:
+    person_income = st.number_input(
+        "Annual Income",
+        min_value=0,
+        value=50000,
+        step = 5000
+    )
+
+    cb_person_cred_hist_length = st.number_input(
+    "Credit History Length (Years)",
+    min_value=0,
+    max_value=30,
     value=3
-)
+    )
 
-home_ownership = st.selectbox(
-    "Home Ownership",
-    ["MORTGAGE", "OWN", "RENT", "OTHER"]
-)
+    st.markdown("---")
 
+st.subheader("💰 Loan Information")
+
+col3, col4 = st.columns(2)
+
+with col3:
+    loan_amnt = st.number_input(
+        "Loan Amount Requested",
+        min_value=0,
+        value=10000,
+        step = 1000
+    )
+
+    loan_int_rate = st.slider(
+        "Loan Interest Rate (Per Year %)",
+        1.0,
+        30.0,
+        10.0
+    )
+    st.markdown("---")
+
+with col4:
+    loan_grade = st.selectbox(
+        "Credit Rating",
+        ["A", "B", "C", "D", "E", "F", "G"]
+    )
+
+    loan_percent_income = st.slider(
+    "Income Used for Loan (%)",
+    0,
+    100,
+    20
+    ) / 100
+
+    st.markdown("---")
+
+st.subheader("🏠 Additional Details")
+
+col5, col6 = st.columns(2)
+
+with col5:
+    home_ownership = st.selectbox(
+        "Home Ownership",
+        ["MORTGAGE", "OWN", "RENT", "OTHER"]
+    )
+
+with col6:
+    default_history = st.selectbox(
+        "Loan Repayment History",
+        ["Good", "Missed Payments Before"]
+    )
 
 loan_intent = st.selectbox(
     "Loan Intent",
@@ -65,10 +145,7 @@ loan_intent = st.selectbox(
     ]
 )
 
-default_history = st.selectbox(
-    "Previous Default",
-    ["N", "Y"]
-)
+
 
 
 
@@ -105,8 +182,9 @@ input_data = {
     "loan_intent_PERSONAL": 1 if loan_intent == "PERSONAL" else 0,
     "loan_intent_VENTURE": 1 if loan_intent == "VENTURE" else 0,
 
-    "cb_person_default_on_file_Y": 1 if default_history == "Y" else 0
-}
+    "cb_person_default_on_file_Y": (
+        1 if default_history == "Missed Payments Before" else 0
+    )}
 
 input_df = pd.DataFrame([input_data])
 
@@ -124,4 +202,14 @@ if st.button("Predict Risk"):
     else:
         st.success(f"Low Risk Loan Applicant")
 
-    st.write(f"Risk Probability: {probability:.2f}")
+    st.progress(float(probability))
+    st.write(f"Risk Probability: {probability:.2%}")
+
+    if probability > 0.7:
+        st.warning("High probability of loan default.")
+
+    elif probability > 0.4:
+        st.info("Moderate financial risk detected.")
+
+    else:
+        st.success("Applicant appears financially stable.")
