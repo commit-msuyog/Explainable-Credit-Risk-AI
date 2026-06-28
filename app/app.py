@@ -2,7 +2,20 @@ import streamlit as st
 import joblib
 import pandas as pd
 
+import sys
 import os
+
+current_dir = os.path.dirname(__file__)
+
+project_root = os.path.abspath(os.path.join(current_dir, ".."))
+
+src_path = os.path.join(project_root, "src")
+
+sys.path.append(src_path)
+
+from ai_explain import generate_explanation
+
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -190,6 +203,7 @@ input_df = pd.DataFrame([input_data])
 
 input_df = input_df.reindex(columns=features, fill_value=0)
 
+
 if st.button("Predict Risk"):
 
     prediction = model.predict(input_df)[0]
@@ -197,12 +211,13 @@ if st.button("Predict Risk"):
     probability = model.predict_proba(input_df)[0][1]
 
     if prediction == 1:
-        st.error(f"High Risk Loan Applicant")
+        st.error("High Risk Loan Applicant")
 
     else:
-        st.success(f"Low Risk Loan Applicant")
+        st.success("Low Risk Loan Applicant")
 
     st.progress(float(probability))
+
     st.write(f"Risk Probability: {probability:.2%}")
 
     if probability > 0.7:
@@ -213,3 +228,25 @@ if st.button("Predict Risk"):
 
     else:
         st.success("Applicant appears financially stable.")
+
+
+    # AI Explanation
+    ai_explanation = generate_explanation(
+        prediction,
+        probability,
+        person_income,
+        loan_amnt,
+        loan_int_rate,
+        loan_grade,
+        default_history,
+        person_emp_length,
+        cb_person_cred_hist_length,
+        loan_percent_income
+    )
+
+    st.markdown("---")
+
+    st.subheader("🤖 AI Financial Explanation")
+
+    st.write(ai_explanation)
+
