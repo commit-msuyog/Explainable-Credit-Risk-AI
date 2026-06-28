@@ -6,3 +6,4 @@ scikit-learn
 joblib
 google-generativeai
 python-dotenv
+groq

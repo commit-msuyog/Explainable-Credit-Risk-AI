@@ -1,9 +1,9 @@
 import streamlit as st
 import joblib
 import pandas as pd
-
 import sys
 import os
+
 
 current_dir = os.path.dirname(__file__)
 
@@ -28,34 +28,55 @@ model = joblib.load(model_path)
 features = joblib.load(features_path)
 
 
-st.title("Explainable Credit Risk AI")
-st.write("Predict whether a loan applicant is risky or safe.")
+st.title("🧠 CredInsight AI")
+st.write("Explainable AI-Powered Credit Risk Assessment")
 st.markdown("---")
 
 with st.sidebar:
 
-    st.markdown("# 💳 Credit Risk AI")
+    st.markdown("### ⚙️ Prediction Engine")
 
-    st.markdown("---")
+    st.write(
+        "Random Forest + Groq LLM"
+    )
 
-    st.markdown("### 🤖 Model Information")
-
-    st.write("Random Forest Classifier")
-
-    st.markdown("### 📌 Features")
+    st.markdown("### ✨ Capabilities")
 
     st.markdown("""
     - Loan Risk Prediction  
-    - Risk Probability  
-    - Explainable AI Logic  
-    - Financial Risk Analysis  
+    - AI Financial Insights  
+    - Risk Probability Analysis  
+    - Explainable AI Assessment  
     """)
 
     st.markdown("---")
 
-    st.markdown("### 👨‍💻 Developed By")
+    st.markdown("### 🚀 Developer")
 
-    st.write("Suyog Verma")
+    st.markdown("**Suyog Verma**")
+
+    
+    st.caption(
+    "Building intelligent AI systems and real-world ML applications"
+    )
+
+    st.markdown(
+        """
+        📧 [Email](mailto:suyogverma0057@gmail.com)
+
+        🔗 [LinkedIn](https://www.linkedin.com/in/suyog01/)
+
+        💻 [GitHub](https://github.com/commit-msuyog)
+    """
+    )
+
+    st.markdown("---")
+
+    st.caption(
+        "Built using Streamlit, Scikit-Learn and Groq API"
+    )
+
+
 
 
 st.subheader("👤 Applicant Information")
@@ -121,12 +142,8 @@ with col4:
         ["A", "B", "C", "D", "E", "F", "G"]
     )
 
-    loan_percent_income = st.slider(
-    "Income Used for Loan (%)",
-    0,
-    100,
-    20
-    ) / 100
+    loan_percent_income = (loan_amnt / person_income)
+    st.info( f" Income Used For Loan: {loan_percent_income:.2%}" )
 
     st.markdown("---")
 
@@ -157,10 +174,6 @@ loan_intent = st.selectbox(
         "DEBTCONSOLIDATION"
     ]
 )
-
-
-
-
 
 grade_mapping = {
     "A": 0,
