@@ -510,7 +510,17 @@ with c10:
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ── Pre-assessment signal chips ───────────────────────────────────────────────
-st.markdown("##### 🔎 Pre-Assessment Signals")
+st.markdown(
+        """
+        <h4 style="
+            color:#22C55E;
+            margin-bottom:0.5rem;
+        ">
+            🔎 Pre-Assessment Signals
+        </h4>
+        """,
+        unsafe_allow_html=True
+    )
 chips = [
     (f"Age: {person_age}", "chip-green" if person_age >= 25 else "chip-yellow"),
     (f"Grade: {loan_grade}", "chip-green" if loan_grade in ["A","B"] else ("chip-yellow" if loan_grade in ["C","D"] else "chip-red")),
