@@ -6,16 +6,6 @@ An AI-powered credit risk assessment platform that combines machine learning, ex
 
 https://credinsight-ai.streamlit.app/
 
----
-
-## 📌 Features
-
-* 📊 Credit Risk Prediction
-* 🧠 AI Financial Analysis
-* 📈 Risk Probability Scoring
-* 🔍 Explainable AI Insights
-
----
 
 ## 🛠️ Tech Stack
 
@@ -25,19 +15,17 @@ https://credinsight-ai.streamlit.app/
 * Random Forest Classifier
 * Pandas
 * NumPy
+* Matplotlib & Seaborn
 
 ### AI Integration
 
-* Groq API
-* Llama 3.1
+* Groq API (Llama 3.1)
 
 ### Frontend & Deployment
 
 * Streamlit
 * Custom CSS
 * Streamlit Community Cloud
-
----
 
 ## 💡 Project Overview
 
@@ -52,36 +40,27 @@ This project focuses on:
 * Intelligent prediction systems
 * Real-world ML deployment
 
----
-
-## 👨‍💻 Developer
-
-**Suyog Verma**
-
-Focused on building intelligent AI systems and real-world machine learning applications.
-
-* LinkedIn - https://www.linkedin.com/in/suyog01/
-* GitHub - https://github.com/commit-msuyog
-* Email - suyogverma0057@gmail.com
-
----
-
 ## 📸 Screenshots
 
 ### Dashboard
 
 ![Dashboard](assets/home.png)
 
-### AI Financial Analysis
+### AI Analysis
 
-![AI Analysis](pred/analysis.png)
-
----
+![AI Analysis](assets/pred.png)
 
 ## 📈 Future Improvements
 
 * SHAP Explainability
 * PDF Financial Reports
 * Advanced Risk Visualizations
-* Database Integration
 * Multi-model Risk Analysis
+
+## 👨‍💻 Developer
+
+**Suyog Verma**
+
+* LinkedIn - https://www.linkedin.com/in/suyog01/
+* GitHub - https://github.com/commit-msuyog
+* Email - suyogverma0057@gmail.com
