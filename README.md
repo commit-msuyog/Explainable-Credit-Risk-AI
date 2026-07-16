@@ -48,7 +48,7 @@ This project focuses on:
 
 ### AI Analysis
 
-![AI Analysis](assets/pred.png)
+![AI Analysis](assets/ai-explain.png)
 
 ## 📈 Future Improvements
 
